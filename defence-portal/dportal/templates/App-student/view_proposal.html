@@ -1,0 +1,81 @@
+{% extends 'App-student/base.html' %} {% load static %} {% block title %}Dashboard{% endblock title %} {% block main %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Proposal</li>
+        <li class="breadcrumb-item active">Proposal List</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="add-button">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                {% if self_proposal %}
+                <span class="btn btn-primary"> Already Submitted </span>
+                {% else %}
+                <a class="btn btn-primary" href="{% url 'student:submitProposalform' %}"
+                  ><i class="bi bi-person-plus-fill"></i>Submit Proposal</a
+                >
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- Table with stripped rows -->
+            <table id="example" class="table table-striped datatable" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>Semester</th>
+                  <th>Defence Type</th>
+                  <th>Title</th>
+                  <th>Defence Status</th>
+                  <th>Supervisor</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if self_proposal %}{% for self in self_proposal %}
+                <tr>
+                  <td>{{ self.semester }}</td>
+                  <td>{{ self.defence_type }}</td>
+                  <td>{{ self.defence_title }}</td>
+                  <td>
+                    {% if self.defence_status == 1 %}
+                    <span class="alert alert-success">Approved</span>
+                    {% elif self.defence_status == 2 %}
+                    <span class="alert alert-danger">Rejected</span>
+                    {% else %}
+                    <span class="">Pending</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if self.assigned_status == 1 %}
+                    <span class="alert alert-success">Approved</span>
+                    {% elif self.assigned_status == 2 %}
+                    <span class="alert alert-danger">Rejected</span>
+                    {% else %}
+                    <span class="">Not Assign</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %} {% endif %}
+              </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock main %}

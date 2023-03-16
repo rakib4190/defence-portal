@@ -1,0 +1,67 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Add Teacher{% endblock title %} {% block main %}
+<main>
+  <div class="container">
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Add New Teacher</h5>
+                  <p class="text-center small">Enter Teacher details to Add a Teacher</p>
+                </div>
+
+                <form class="row g-3 needs-validation" method="post" action="#">
+                  {% csrf_token %}
+                  <div class="col-12">
+                    <label for="first_name" class="form-label">Fisrt Name</label>
+                    <input type="text" name="first_name" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="teacher initial" class="form-label">Teacher Initial</label>
+                    <input type="text" name="teacher_initial" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="phone number" class="form-label">Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="username" class="form-label">User Name</label>
+                    <input type="text" name="username" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">Add Teacher</button>
+                  </div>
+                  <div>
+                    {% if messages %} {% for message in messages %} {% if message.tags == 'error' %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                    {% endif %} {% if message.tags == 'success' %}
+                    <div class="alert alert-success">{{ message }}</div>
+                    {% endif %} {% endfor %} {% endif %}
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0"><a href="{% url 'admins:homepage' %}">Back To Dashboard</a></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock main %}

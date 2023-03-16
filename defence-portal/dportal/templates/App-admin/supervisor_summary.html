@@ -1,0 +1,56 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Supervisor{% endblock title %} {% block main %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Student</li>
+        <li class="breadcrumb-item active">Registered Student List</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="select-semester">
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Select Semester</option>
+                <option value="1">Spring-2021</option>
+                <option value="2">Fall-2021</option>
+                <option value="3">Summer-2021</option>
+                <option value="3">Spring-2022</option>
+                <option value="3">Fall-2022</option>
+              </select>
+            </div>
+            <div class="container">
+              <table id="example" class="table table-striped datatable" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Serial No</th>
+                    <th>Name</th>
+                    <th>Initial</th>
+                    <th>Number Of Student</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>001</td>
+                    <td>Md. Shohel Arman</td>
+                    <td>MSA</td>
+                    <td>12</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+{% endblock main %}

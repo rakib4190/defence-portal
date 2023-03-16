@@ -1,0 +1,73 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Notice{% endblock title %} {% block main %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admins:homepage' %}">Home</a></li>
+        <li class="breadcrumb-item">Result</li>
+        <li class="breadcrumb-item active">All Student Result</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="container">
+              <table id="example" class="table table-striped datatable" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Student Id</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Mid Term</th>
+                    <th>Final Term</th>
+                    <th>Supervior Initial</th>
+                    <th>Superviore Name</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if assigned_student_list %}{% for assigned_student in assigned_student_list %}
+                  <tr>
+                    <td>{{ assigned_student.student_id_id }}</td>
+                    <td>{{ assigned_student.student_id.admin.first_name }}</td>
+                    <td>{{ assigned_student.student_id.admin.email}}</td>
+                    <td>
+                      {% if assigned_student.mid_status == 1 %}
+                      <span class="btn btn-success">Done</span>
+                      {% else %}
+                      <span class="btn btn-danger">Not Complete</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if assigned_student.final_status == 1 %}
+                      <span class="btn btn-success">Done</span>
+                      {% else %}
+                      <span class="btn btn-danger">Not Complete</span>
+                      {% endif %}
+                    </td>
+                    <td>{{ assigned_student.teacher_id.teacher_initial }}</td>
+                    <td>{{ assigned_student.teacher_id.admin.first_name }}</td>
+
+                    <td>
+                      <a class="btn btn-primary" href="{% url 'admins:addResult' assigned_student.id %}"
+                        ><i class="bi bi-pencil-square"></i>Edit Result</a
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %} {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+{% endblock main %}

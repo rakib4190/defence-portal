@@ -1,0 +1,70 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Teacher List{% endblock title %} {% block main %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admins:homepage' %}">Home</a></li>
+        <li class="breadcrumb-item">Teacher</li>
+        <li class="breadcrumb-item active">Registered Teacher List</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="add-button">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-success" href="{% url 'admins:addteacher' %}"
+                  ><i class="bi bi-person-plus-fill"></i>Add Teacher</a
+                >
+              </div>
+            </div>
+
+            <!-- Table with stripped rows -->
+            <table id="example" class="table table-striped datatable" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>Teacher ID</th>
+                  <th>Teacher Name</th>
+                  <th>Teacher Initial</th>
+                  <th>Teacher Email</th>
+                  <th>Phone Number</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if teacher_list %} {% for teacher in teacher_list %}
+                <tr>
+                  <td>{{ teacher.id }}</td>
+                  <td>{{ teacher.admin.first_name }} {{ teacher.admin.last_name }}</td>
+                  <td>{{ teacher.teacher_initial }}</td>
+                  <td>{{ teacher.admin.email }}</td>
+                  <td>{{ teacher.phone_number }}</td>
+                  <td>
+                    <a class="btn btn-primary" href="{% url 'admins:updateTeacher' teacher.admin.id %}"
+                      ><i class="bi bi-pencil-square"></i>Edit</a
+                    >
+                    <form action="{% url 'admins:deleteTeacher' teacher.id %}" method="POST" class="d-inline">
+                      {% csrf_token %}
+                      <input type="submit" class="btn btn-danger" value="Delete" />
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %} {% endif %}
+              </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock main %}

@@ -1,0 +1,111 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Update{% endblock title %} {% block main %}
+<main>
+  <div class="container">
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">View Defence Proposal </h5>
+                  <h6 class="card-title text-center pb-0 fs-5"> Student Name: {{ proposal.student_id.admin.first_name }}</h6>
+                  <h6 class="card-title text-center pb-0 fs-5"> Student ID: {{ proposal.student_id_id }}</h6>
+                </div>
+
+                <form class="row g-3 needs-validation" method="post" action="#" >
+                  {% csrf_token %}
+                  <div class="col-12">
+                    <label for="credit comlete" class="form-label">Credit Complete</label>
+                    <input
+                      type="number"
+                      name="credit_complete"
+                      class="form-control"
+                      required
+                      value="{{ proposal.credit_complete }}"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="current cgpa" class="form-label">Current CGPA</label>
+                    <input
+                      type="text"
+                      name="current_cgpa"
+                      class="form-control"
+                      required
+                      value="{{ proposal.current_cgpa }}"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="Semester" class="form-label">Semester</label>
+                    <input
+                      type="text"
+                      name="semester"
+                      class="form-control"
+                      required
+                      value="{{ proposal.semester }}"
+                      readonly
+                    />
+                  </div>
+
+                  <div class="col-12">
+                   <label for="Semester" class="form-label">Major In</label>
+                    <input
+                      type="text"
+                      name="working_area"
+                      class="form-control"
+                      required
+                      value="{{ proposal.working_area }}"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-12">
+                   <label for="Semester" class="form-label">Defence Type</label>
+                    <input
+                      type="text"
+                      name="defence_type"
+                      class="form-control"
+                      required
+                      value="{{ proposal.defence_type }}"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="defence title" class="form-label">Defence Title</label>
+                    <input
+                      type="text"
+                      name="defence_title"
+                      class="form-control"
+                      required
+                      value="{{ proposal.defence_title }}"
+                      readonly
+                    />
+                    <p>{{ proposal.defence_description }}</p>
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      style="height: 100px"
+                      name="defence_description">{{ proposal.defence_description }}</textarea>
+                    <label for="floatingTextarea2">Description</label>
+                  </div>
+                  <div>
+                    {% if messages %} {% for message in messages %} {% if message.tags == 'error' %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                    {% endif %} {% if message.tags == 'success' %}
+                    <div class="alert alert-success">{{ message }}</div>
+                    {% endif %} {% endfor %} {% endif %}
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0"><a href="{% url 'admins:homepage' %}">Back To Dashboard</a></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock main %}

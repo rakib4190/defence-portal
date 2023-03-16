@@ -1,0 +1,65 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Student List{% endblock title %} {% block main %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Student</li>
+        <li class="breadcrumb-item active">Registered Student List</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="add-button">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-success" href="{% url 'admins:addstudentform' %}"
+                  ><i class="bi bi-person-plus-fill"></i>Add Student</a
+                >
+              </div>
+            </div>
+            <!-- Table with stripped rows -->
+            <table id="example" class="table table-striped datatable" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Student Name</th>
+                  <th>Student Email</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if student_list %} {% for student in student_list %}
+                <tr>
+                  <td>{{ student.id }}</td>
+                  <td>{{ student.admin.first_name }} {{ student.admin.last_name }}</td>
+                  <td>{{ student.admin.email }}</td>
+                  <td>
+                    <a class="btn btn-primary" href="{% url 'admins:updateStudent' student.admin.id %}"
+                      ><i class="bi bi-pencil-square"></i>Edit</a
+                    >
+                    <form action="{% url 'admins:deleteStudent' student.id %}" method="POST" class="d-inline">
+                      {% csrf_token %}
+                      <input type="submit" class="btn btn-danger" value="Delete" />
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %} {% endif %}
+              </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+{% endblock main %}

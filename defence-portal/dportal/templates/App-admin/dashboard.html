@@ -1,0 +1,124 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Dashboard{% endblock title %} {% block main %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+      <!-- Left side columns -->
+      <div class="col-lg-10">
+        <div class="row">
+          <!-- Sales Card -->
+          <div class="col-xxl-4 col-md-3">
+            <div class="card info-card sales-card" style="background-color: #9b59b6">
+              <div class="card-body">
+                <h5 class="card-title" style="color: #ecf0f1">Total Admin</h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-person"></i>
+                  </div>
+                  <div class="ps-2">
+                    <h6 style="color: aqua" ;>{{ admin_count }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Sales Card -->
+          <div class="col-xxl-4 col-md-3">
+            <div class="card info-card sales-card" style="background-color: #2980b9">
+              <div class="card-body">
+                <h5 class="card-title" style="color: aqua">Total Teacher</h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-person"></i>
+                  </div>
+                  <div class="ps-2">
+                    <h6 style="color: aqua" ;>{{ teacher_count }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-md-3">
+            <div class="card info-card sales-card" style="background-color: #2c3e50">
+              <div class="card-body">
+                <h5 class="card-title" style="color: aqua">Total Student</h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-people-fill"></i>
+                  </div>
+                  <div class="ps-2">
+                    <h6 style="color: aqua" ;>{{ student_count }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-md-3">
+            <div class="card info-card sales-card" style="background-color: #273c75">
+              <div class="card-body">
+                <h5 class="card-title" style="color: aqua">Total Proposal</h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-receipt-cutoff"></i>
+                  </div>
+                  <div class="ps-2">
+                    <h6 style="color: aqua" ;>{{ proposal_count }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-md-3">
+            <div class="card info-card sales-card" style="background-color: #e67e22">
+              <div class="card-body">
+                <h5 class="card-title" style="color: #fff">Mid Term Done</h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-person-check-fill"></i>
+                  </div>
+                  <div class="ps-2">
+                    <h6 style="color: aqua" ;>{{ mid_term_done_count }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-md-3">
+            <div class="card info-card sales-card" style="background-color: #3dc1d3">
+              <div class="card-body">
+                <h5 class="card-title" style="color: rgb(87, 32, 206)">Final Term Done</h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-person-check-fill"></i>
+                  </div>
+                  <div class="ps-2">
+                    <h6 style="color: aqua" ;>{{ final_term_done_count }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Left side columns -->
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+{% endblock main %}

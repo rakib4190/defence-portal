@@ -1,0 +1,71 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Dashboard{% endblock title %} {% block main %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Student</li>
+        <li class="breadcrumb-item active">Registered Student List</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="select-semester">
+              <select class="form-select" aria-label="Default select example">
+                <option>Select Semester</option>
+                {% for semester in semester_list %}
+                <option>{{ semester.semester_name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="container">
+              <table id="example" class="table table-striped datatable" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Semester</th>
+                    <th>Defence Type</th>
+                    <th>Defence Title</th>
+                    <th>Supervisor Initial</th>
+                    <th>Supervisor Name</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if assigned_student_list %}{% for assigned_student in assigned_student_list %}
+                  <tr>
+                    <td>{{ assigned_student.student_id_id }}</td>
+                    <td>{{ assigned_student.student_id.admin.first_name }}</td>
+                    <td>{{ assigned_student.student_id.admin.email}}</td>
+                    <td>{{ assigned_student.student_id.semester}}</td>
+                    <td>{{ assigned_student.student_id.proposal_id.defence_type }}</td>
+                    <td>{{ assigned_student.student_id.proposal_id.defence_title }}</td>
+                    <td>{{ assigned_student.teacher_id.teacher_initial }}</td>
+                    <td>{{ assigned_student.teacher_id.admin.first_name }}</td>
+
+                    <td>
+                      <a class="btn btn-primary" href="{% url 'admins:changeSupervisor' assigned_student.id %}"
+                        ><i class="bi bi-pencil-square"></i>Change SV</a
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %} {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+{% endblock main %}

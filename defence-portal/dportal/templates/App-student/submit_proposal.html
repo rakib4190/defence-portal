@@ -1,0 +1,93 @@
+{% extends 'App-student/base.html' %} {% load static %} {% block title %}Dashboard{% endblock title %} {% block main %}
+<main>
+  <div class="container">
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Submit Defence Proposal</h5>
+                  <p class="text-center small">Fill-Up The Information Carefully!!!</p>
+                  <p class="text-center small">You Can Not Change Anything After Submit</p>
+                </div>
+
+                <form
+                  class="row g-3 needs-validation"
+                  method="post"
+                  action="{% url 'student:submitProposal' %}"
+                  novalidate
+                >
+                  {% csrf_token %}
+                  <div class="col-12">
+                    <label for="credit comlete" class="form-label">Credit Complete</label>
+                    <input type="number" name="credit_complete" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="current cgpa" class="form-label">Current CGPA</label>
+                    <input type="text" name="current_cgpa" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label for="semester" class="form-label">Semester</label>
+                    <select class="form-select" aria-label="Default select example" name="semester">
+                      {% for semester in semester_list %}
+                      <option>{{ semester.semester_name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="major in" class="form-label">Major In</label>
+                    <select class="form-select" aria-label="Default select example" name="working_area">
+                      <option selected>Non Major</option>
+                      <option value="Data Science">Data Science</option>
+                      <option value="Robotics">Robotics</option>
+                      <option value="Cyber Security">Cyber Security</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="Defence Type" class="form-label">Defence Type</label>
+                    <select class="form-select" aria-label="Default select example" name="defence_type">
+                      <option selected>Project</option>
+                      <option value="Thesis">Thesis</option>
+                      <option value="Internship">Internship</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="defence title" class="form-label">Defence Title</label>
+                    <input type="text" name="defence_title" class="form-control" required />
+                  </div>
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      placeholder="Leave a comment here"
+                      id="floatingTextarea2"
+                      style="height: 100px"
+                      name="defence_description"
+                    ></textarea>
+                    <label for="floatingTextarea2">Description</label>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">Submit Proposal</button>
+                  </div>
+                  <div>
+                    {% if messages %} {% for message in messages %} {% if message.tags == 'error' %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                    {% endif %} {% if message.tags == 'success' %}
+                    <div class="alert alert-success">{{ message }}</div>
+                    {% endif %} {% endfor %} {% endif %}
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0"><a href="{% url 'student:homepage' %}">Back To Dashboard</a></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock main %}

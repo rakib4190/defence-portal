@@ -1,0 +1,58 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Add Student{% endblock title %} {% block main %}
+<div class="container">
+  <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="pt-4 pb-2">
+                <h5 class="card-title text-center pb-0 fs-4">Add New TStudent</h5>
+                <p class="text-center small">Enter Student details to Add a Student</p>
+              </div>
+
+              <form class="row g-3 needs-validation" method="post" action="{% url 'admins:addstudent' %}">
+                {% csrf_token %}
+                <div class="col-12">
+                  <label for="First Name" class="form-label">First Name</label>
+                  <input type="text" class="form-control" name="first_name" />
+                </div>
+                <div class="col-12">
+                  <label for="Last Name" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" name="last_name" />
+                </div>
+                <div class="col-12">
+                  <label for="Email" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" />
+                </div>
+                <div class="col-12">
+                  <label for="User Name" class="form-label">User Name</label>
+                  <input type="text" class="form-control" name="username" />
+                </div>
+                <div class="col-12">
+                  <label for="Password" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password" />
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-primary w-100" type="submit">Add Student</button>
+                </div>
+                <div>
+                  {% if messages %} {% for message in messages %} {% if message.tags == 'error' %}
+                  <div class="alert alert-danger">{{ message }}</div>
+                  {% endif %} {% if message.tags == 'success' %}
+                  <div class="alert alert-success">{{ message }}</div>
+                  {% endif %} {% endfor %} {% endif %}
+                </div>
+                <div class="col-12">
+                  <p class="small mb-0"><a href="{% url 'admins:homepage' %}">Back To Dashboard</a></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+{% endblock main %}

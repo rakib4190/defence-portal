@@ -1,0 +1,63 @@
+{% extends 'App-admin/base.html' %} {% load static %} {% block title %}Notice{% endblock title %} {% block main %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admins:homepage' %}">Home</a></li>
+        <li class="breadcrumb-item">Notice</li>
+        <li class="breadcrumb-item active">All Notice</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="add-button">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary" href="{% url 'admins:addNotice' %}"><i class="bi bi-plus"></i>Add Notice</a>
+                <!-- Modal -->
+              </div>
+            </div>
+            <div class="container">
+              <table id="example" class="table table-striped datatable" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Serial</th>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if notice_list %}{% for notice in notice_list %}
+                  <tr>
+                    <td>{{ notice.id }}</td>
+                    <td>{{ notice.created_at }}</td>
+                    <td>{{ notice.notice_title }}</td>
+                    <td>
+                      <!--<a class="btn btn-primary" href="{% url 'admins:addNotice' %}"><i class="bi bi-eye"></i>Details</a>-->
+                      <a class="btn btn-primary" href="{% url 'admins:updateNotice' notice.id%}"
+                        ><i class="bi bi-pencil-square"></i>Edit</a
+                      >
+                      <form action="{% url 'admins:deleteNotice' notice.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger" value="Delete" />
+                      </form>
+                    </td>
+                  </tr>
+                  {% endfor %} {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+{% endblock main %}
